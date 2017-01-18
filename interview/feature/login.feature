@@ -1,10 +1,15 @@
-Feature: Login functionality
+Feature: Booking functionality
 
-  Scenario Outline: unsuccessfull login with incorrect user id and password
-    Given the user is on facebook page
-    When the user enters "<username>" and "<password>"
-    Then the login should fail
+  Scenario Outline: Create Booking functionality verification
+    Given the user is on booking page
+    When the user enters "<firstname>" , "<surname>" , "<price>","<deposit>" and the checkin dates
+    Then the corresponding details should be created as a record visible in the page with a delete button
 
     Examples: 
-      | username | password |
-      | test1    | test1    |
+      | firstname | surname | price | deposit |
+      | test1     | test1   | 100   | true    |
+
+  Scenario: Verify delete functionality
+    Given the user is on booking page 
+    When the user clicks on the delete button if a record exists
+    Then the record should be deleted from the page
