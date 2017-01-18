@@ -5,6 +5,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,7 +42,12 @@ public class Tests extends FrameworkInitialize {
 	public void DeleteBooking() throws InterruptedException {
 		home.clickDelete();
 		Assert.assertTrue(home.verifyDelete());
+	}
+	
+	@After
+	public void finish(){
 		DriverContext.Driver.close();
+
 	}
 
 }
