@@ -3,7 +3,7 @@ package com.stepDefinition;
 import com.automation.DriverContext;
 import com.automation.FrameworkInitialize;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
