@@ -51,7 +51,7 @@ public class HomePage extends BasePage {
 	@FindBy(how = How.XPATH, using = "//*[@id='bookings']")
 	public WebElement tableData;
 
-	@FindBy(how = How.XPATH, using = "//*[contains(@id,'240')]/div/input")
+	@FindBy(how = How.XPATH, using = "//input[@value='Delete']")
 	public List<WebElement> deleteButton;
 
 	public void enterFirstName(String name) {
@@ -109,20 +109,20 @@ public class HomePage extends BasePage {
 	}
 
 	public void clickDelete() {
-		try{
-		WebDriverWait wait = new WebDriverWait(DriverContext.Driver, 30);
-		WebElement element = wait.until(ExpectedConditions
-				.elementToBeClickable(deleteButton.get(0)));
-		noOfRowsBeforeDelete = deleteButton.size();
-		element.click();}
-		catch(Exception e){
+		try {
+			WebDriverWait wait = new WebDriverWait(DriverContext.Driver, 30);
+			WebElement element = wait.until(ExpectedConditions
+					.visibilityOf(deleteButton.get(0)));
+			noOfRowsBeforeDelete = deleteButton.size();
+			element.click();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
 	public boolean verifyDelete() throws InterruptedException {
-		clickDelete();
+		Thread.sleep(2000);
 		noOfRowsAfterDelete = deleteButton.size();
 		if (noOfRowsBeforeDelete == noOfRowsAfterDelete) {
 			return false;
@@ -134,7 +134,7 @@ public class HomePage extends BasePage {
 			throws InterruptedException {
 		Thread.sleep(6000);
 		List<WebElement> rows = tableData.findElements(By
-				.xpath(".//*[contains(@id,'240')]"));
+				.xpath(".//*[@class='row']"));
 		for (int i = 0; i < rows.size(); i++) {
 			List<WebElement> columns = rows.get(i).findElements(
 					By.xpath(".//div[contains(@class,'col-md-')]"));
@@ -142,7 +142,7 @@ public class HomePage extends BasePage {
 			for (int j = 0; j < 4; j++) {
 				actualData.add(columns.get(j).getText());
 			}
-			if (expectedResult.equals(actualData)) {
+			if (actualData.equals(expectedResult)) {
 				return true;
 			}
 		}

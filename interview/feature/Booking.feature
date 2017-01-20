@@ -7,7 +7,7 @@ Feature: Booking functionality
 
     Examples: 
       | firstname | surname | price | deposit |
-      | test1     | test1   | 100   | true    |
+      | test1     | test2   | 100   | true    |
 
   Scenario: Verify delete functionality
     Given the user is on booking page 
